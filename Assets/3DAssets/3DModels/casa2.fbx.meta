@@ -1,23 +1,8 @@
 fileFormatVersion: 2
-guid: 7818b88afe8ccd54f90aef3f19a74bc6
+guid: 0c1a08e7bb5813245b8535ead4520853
 ModelImporter:
   serializedVersion: 26
-  internalIDToNameTable:
-  - first:
-      74: 7811794567324086137
-    second: Cube|Cube|Cube|CubeAction.001|Cube|CubeAction.001
-  - first:
-      74: 6438755374912531219
-    second: Cube|Cube|Cube|CubeAction.002|Cube|CubeAction.002
-  - first:
-      74: -6773969758128978148
-    second: Cube|Cube|Cube|CubeAction.003|Cube|CubeAction.003
-  - first:
-      74: 8970656223723244233
-    second: Cube|Cube|Cube|CubeAction.004|Cube|CubeAction.004
-  - first:
-      74: 8365637861176052714
-    second: Cube|Cube|Cube|CubeAction|Cube|CubeAction
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -102,7 +87,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
