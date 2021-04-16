@@ -9,16 +9,27 @@ public class TrdControl : MonoBehaviour
     Rigidbody rdb;
     Vector3 move, rot;
     Animator anim;
+	
     public float forcemove=1000;
+	
     GameObject dummyCam;
+	
     public float drag=4;
+	
     public AudioSource scream;
+	
     public float jumpForce =500;
     float timeJump = 1;
+	public bool mayJump = true;//se o jogador pode ou nao pular
+	public bool mayFly;//se o jogador pode ou nao voar
+	
     float ikforce = 0;
     bool grab = false;
+	
     FixedJoint grabjoint;
+	
     public GameObject projetil;
+	
     public enum States
     {
         Walk,
@@ -93,7 +104,11 @@ public class TrdControl : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump"))
         {
-            ChangeState(States.Jump);
+			if(mayJump == true && mayFly == false || mayFly == true)
+			{
+				ChangeState(States.Jump);
+				mayJump = false;
+			}
         }
         if (Input.GetButtonUp("Jump"))
         {
@@ -255,7 +270,7 @@ public class TrdControl : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
             //loop
-            rdb.AddForce(Vector3.up* jumpForce* timeJump);
+			rdb.AddForce(Vector3.up* jumpForce* timeJump);
             timeJump -= Time.fixedDeltaTime;
             if (timeJump <= 0)
             {
@@ -265,6 +280,26 @@ public class TrdControl : MonoBehaviour
         }
         //saida
     }
+	/*//Jump() original
+	IEnumerator Jump()
+    {
+        timeJump = .4f;
+        //entrada
+        while (state == States.Jump)
+        {
+            yield return new WaitForFixedUpdate();
+            //loop
+			rdb.AddForce(Vector3.up* jumpForce* timeJump);
+            timeJump -= Time.fixedDeltaTime;
+            if (timeJump <= 0)
+            {
+                ChangeState(States.Idle);
+            }
+            
+        }
+        //saida
+    }
+	*/
 
     void OnAnimatorIK(int layerIndex)
     {

@@ -6,6 +6,8 @@ public class PlayerCollision : MonoBehaviour
 {
 	[SerializeField]
 	Transform playerTransf;
+	[SerializeField]
+	TrdControl TrdC;
 	
     private void OnCollisionEnter(Collision other)
 	{
@@ -19,6 +21,11 @@ public class PlayerCollision : MonoBehaviour
 			{
 				playerTransf.position = new Vector3 (216, 8, 186);
 			}
+		}
+		
+		if(other.gameObject.tag == "Ground")
+		{
+			TrdC.mayJump = true;
 		}
 	}
 }
