@@ -42,6 +42,8 @@ public class TrdControl : MonoBehaviour
     }
 
     public States state;
+	
+	public GameSessionData GSD;//informacao que e mantida durante uma sessao de jogo
 
     void Start()
     {
@@ -73,6 +75,8 @@ public class TrdControl : MonoBehaviour
         }
         
         StartCoroutine(Idle());
+		
+		transform.position = GSD.playerPosition;
     }
 
     public void SetDummyCam(GameObject dummy)

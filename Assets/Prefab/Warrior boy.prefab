@@ -5007,6 +5007,7 @@ GameObject:
   - component: {fileID: 4568980975116380813}
   - component: {fileID: 4568980975116380812}
   - component: {fileID: 1527523215}
+  - component: {fileID: -1257127123386600116}
   m_Layer: 8
   m_Name: Warrior boy
   m_TagString: Player
@@ -5097,9 +5098,12 @@ MonoBehaviour:
   drag: 100
   scream: {fileID: 1527523215}
   jumpForce: 10000
+  mayJump: 1
+  mayFly: 0
   projetil: {fileID: 3076110161118753512, guid: 051802963d3077847bcaec206e3a0680,
     type: 3}
   state: 2
+  GSD: {fileID: 11400000, guid: 7235404cdd02aa4418d58cce99c7d38e, type: 2}
 --- !u!82 &1527523215
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5196,6 +5200,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-1257127123386600116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4568980974282434822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089fda21c644dd840a0efc286cf17796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransf: {fileID: 4568980974282011942}
+  TrdC: {fileID: 4568980975116380812}
 --- !u!1 &4568980974282434902
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,13 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleGame/MainGame.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleGame/Shrine01.unity
     guid: ce588326ccc7f584889253b037a45b77
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleGame/Shrine02.unity
     guid: e1e14891450627141b5850c0225aaa4f
+  - enabled: 1
+    path: Assets/Scenes/ProjMainScene.unity
+    guid: 48598abf4c2098c48974351f0de72923
+  - enabled: 1
+    path: Assets/Scenes/ProjShrine1.unity
+    guid: 7a192c6334e7fa84793a5fb5606ea59d
   m_configObjects: {}
