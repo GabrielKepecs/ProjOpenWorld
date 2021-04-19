@@ -23,9 +23,17 @@ public class PlayerCollision : MonoBehaviour
 			}
 		}
 		
-		if(other.gameObject.tag == "Ground")
+		/*if(other.gameObject.tag == "Ground")
 		{
 			TrdC.mayJump = true;
+		}*/
+	}
+	
+	private void OnTriggerEnter(Collider other)
+	{
+		if(other.gameObject.tag == "Pit")
+		{
+			playerTransf.position = new Vector3 (0, 0, 0);
 		}
 	}
 }

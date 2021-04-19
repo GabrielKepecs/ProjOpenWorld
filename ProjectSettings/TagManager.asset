@@ -8,6 +8,7 @@ TagManager:
   - Push
   - Water
   - Ground
+  - Pit
   layers:
   - Default
   - TransparentFX

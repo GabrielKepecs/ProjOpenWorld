@@ -20,7 +20,7 @@ public class TrdControl : MonoBehaviour
 	
     public float jumpForce =500;
     float timeJump = 1;
-	public bool mayJump = true;//se o jogador pode ou nao pular
+	//public bool mayJump = true;//se o jogador pode ou nao pular
 	public bool mayFly;//se o jogador pode ou nao voar
 	
     float ikforce = 0;
@@ -108,10 +108,11 @@ public class TrdControl : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump"))
         {
-			if(mayJump == true && mayFly == false || mayFly == true)
+			if(Physics.Raycast(transform.position, Vector3.down, 0.25f) || mayFly)//se tem algo em baixo do player ou mayFly
+			//if(mayJump == true && mayFly == false || mayFly == true)
 			{
 				ChangeState(States.Jump);
-				mayJump = false;
+				//mayJump = false;
 			}
         }
         if (Input.GetButtonUp("Jump"))
