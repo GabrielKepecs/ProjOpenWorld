@@ -6,6 +6,8 @@ public class ChaveCollect : aCollectable
 {
 	[SerializeField]
 	int keyNumber;
+	[SerializeField]
+	InventoryScript IS;
 	
     // Start is called before the first frame update
     public override void Start()
@@ -21,6 +23,7 @@ public class ChaveCollect : aCollectable
 			if(keyNumber == 0)
 			{
 				GSD.hasTargetKey = true;
+				IS.EnableKey1();
 			}
 			else
 			{

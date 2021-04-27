@@ -8,6 +8,8 @@ public class PlayerCollision : MonoBehaviour
 	Transform playerTransf;
 	[SerializeField]
 	TrdControl TrdC;
+	[SerializeField]
+	InventoryScript IS;
 	
     private void OnCollisionEnter(Collision other)
 	{
@@ -39,6 +41,12 @@ public class PlayerCollision : MonoBehaviour
 		if(other.gameObject.tag == "Helmet")
 		{
 			TrdC.EnableHelm();
+			IS.EnableHelm();
+		}
+		
+		if(other.gameObject.tag == "Key2")
+		{
+			IS.EnableKey2();
 		}
 	}
 }

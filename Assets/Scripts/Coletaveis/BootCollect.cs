@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BootCollect : aCollectable
 {
+	[SerializeField]
+	InventoryScript IS;
+	
     // Start is called before the first frame update
     public override void Start()
     {
@@ -19,6 +22,7 @@ public class BootCollect : aCollectable
 		{
 			GSD.hasBoots = true;
 			TrdC.mayFly = true;
+			IS.EnableBoot();
 			
 			Destroy(gameObject);
 		}

@@ -11,6 +11,7 @@ TagManager:
   - Pit
   - Box
   - Helmet
+  - Key2
   layers:
   - Default
   - TransparentFX
