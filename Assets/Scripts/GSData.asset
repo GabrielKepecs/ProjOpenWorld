@@ -13,3 +13,8 @@ MonoBehaviour:
   m_Name: GSData
   m_EditorClassIdentifier: 
   playerPosition: {x: 315, y: 15, z: 400}
+  spawned: 0
+  hasBoots: 0
+  hasTargetKey: 0
+  hasHelm: 0
+  hasSecondKey: 0

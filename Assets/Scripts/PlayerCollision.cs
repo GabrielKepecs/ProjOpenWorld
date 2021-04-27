@@ -35,5 +35,10 @@ public class PlayerCollision : MonoBehaviour
 		{
 			playerTransf.position = new Vector3 (0, 0, 0);
 		}
+		
+		if(other.gameObject.tag == "Helmet")
+		{
+			TrdC.EnableHelm();
+		}
 	}
 }

@@ -9,6 +9,8 @@ TagManager:
   - Water
   - Ground
   - Pit
+  - Box
+  - Helmet
   layers:
   - Default
   - TransparentFX

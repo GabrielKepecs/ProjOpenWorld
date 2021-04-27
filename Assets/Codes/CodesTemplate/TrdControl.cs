@@ -20,8 +20,14 @@ public class TrdControl : MonoBehaviour
 	
     public float jumpForce =500;
     float timeJump = 1;
-	//public bool mayJump = true;//se o jogador pode ou nao pular
+	public bool mayJump = true;//se o jogador pode ou nao pular
 	public bool mayFly;//se o jogador pode ou nao voar
+	
+	[SerializeField]
+	Vector3 initialSpawnLocation;//(315, 15, 400)
+	
+	[SerializeField]
+	GameObject Helmet;
 	
     float ikforce = 0;
     bool grab = false;
@@ -76,7 +82,15 @@ public class TrdControl : MonoBehaviour
         
         StartCoroutine(Idle());
 		
+		if(GSD.spawned == false)
+		{
+			GSD.playerPosition = initialSpawnLocation;
+			GSD.spawned = true;
+		}
 		transform.position = GSD.playerPosition;
+		
+		if(GSD.hasBoots) mayFly = true;
+		if(GSD.hasHelm) EnableHelm();
     }
 
     public void SetDummyCam(GameObject dummy)
@@ -106,13 +120,14 @@ public class TrdControl : MonoBehaviour
         {
             ChangeState(States.Spell);
         }
+		
+		mayJump = Physics.Raycast(transform.position + new Vector3(0, 0.2f, 0), Vector3.down, 0.5f);
+		//Debug.DrawLine(transform.position + new Vector3(0, 0.2f, 0), Vector2.down, Color.white, 0.5f);
         if (Input.GetButtonDown("Jump"))
         {
-			if(Physics.Raycast(transform.position, Vector3.down, 0.25f) || mayFly)//se tem algo em baixo do player ou mayFly
-			//if(mayJump == true && mayFly == false || mayFly == true)
+			if(mayJump || mayFly)//se tem algo em baixo do player ou mayFly
 			{
 				ChangeState(States.Jump);
-				//mayJump = false;
 			}
         }
         if (Input.GetButtonUp("Jump"))
@@ -319,4 +334,9 @@ public class TrdControl : MonoBehaviour
         anim.SetIKRotation(AvatarIKGoal.RightHand, Quaternion.Euler(-40, 131, 301));//124 307 301
 
     }
+	
+	public void EnableHelm()
+	{
+		Helmet.SetActive(true);
+	}
 }
