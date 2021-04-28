@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda85d4f33f0c8549b2e7af1d5d41e4a, type: 3}
   m_Name: GSData
   m_EditorClassIdentifier: 
-  playerPosition: {x: 315, y: 15, z: 400}
-  spawned: 0
-  hasBoots: 0
-  hasTargetKey: 0
-  hasHelm: 0
-  hasSecondKey: 0
+  playerPosition: {x: 177.8, y: 10.5, z: 234.5}
+  spawned: 1
+  hasBoots: 1
+  hasTargetKey: 1
+  hasHelm: 1
+  hasSecondKey: 1
