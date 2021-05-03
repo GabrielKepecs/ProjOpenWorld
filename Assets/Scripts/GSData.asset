@@ -19,5 +19,7 @@ MonoBehaviour:
   hasHelm: 1
   hasSecondKey: 1
   hasCarrot: 0
-  hasCoin: 0
+  coins: 0
   hasPotion: 0
+  hasMap: 0
+  hasShield: 0

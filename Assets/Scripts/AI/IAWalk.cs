@@ -31,6 +31,7 @@ public class IAWalk : MonoBehaviour
 	
 	public Vector3 runTo;
 
+	public bool dropsItem;
 	public GameObject Drop;
 	
     public IaState currentState;
@@ -146,7 +147,7 @@ public class IAWalk : MonoBehaviour
         agent.isStopped = true;
         anim.SetBool("Attack", false);
         anim.SetTrigger("Hit");
-        currentState = IaState.Stopped;
+        currentState = IaState.Berserk;
     }
     void Dying()
     {
@@ -155,7 +156,8 @@ public class IAWalk : MonoBehaviour
 		if(!dead)
 		{
 			anim.SetTrigger("Die");
-			Instantiate(Drop, transform.position, Quaternion.identity);
+			if(dropsItem)
+				Instantiate(Drop, transform.position, Quaternion.identity);
 			dead = true;
 		}
         Destroy(gameObject, 3);

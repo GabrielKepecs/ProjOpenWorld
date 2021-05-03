@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PotionSeller : MonoBehaviour
+public class GiveMap : MonoBehaviour
 {
 	[SerializeField]
 	GameSessionData GSD;
@@ -12,19 +12,15 @@ public class PotionSeller : MonoBehaviour
 	
 	[SerializeField]
 	float playerDistance;
-	
-	[SerializeField]
-	GameObject Potion;
 
     // Update is called once per frame
     void Update()
     {
         playerDistance = Vector3.Distance(iawalk.target.transform.position, transform.position);
 		
-		if(playerDistance < 3 && Input.GetKeyDown("e") && GSD.coins > 0)
+		if(playerDistance < 3 && Input.GetKeyDown("e") && !GSD.hasMap)
 		{
-			GSD.coins--;
-			GSD.hasPotion = true;
+			GSD.hasMap = true;
 		}
     }
 }

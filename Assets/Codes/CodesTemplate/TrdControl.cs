@@ -27,7 +27,7 @@ public class TrdControl : MonoBehaviour
 	Vector3 initialSpawnLocation;//(315, 15, 400)
 	
 	[SerializeField]
-	GameObject Helmet;
+	GameObject Helmet, Map;
 	
     float ikforce = 0;
     bool grab = false;
@@ -138,6 +138,11 @@ public class TrdControl : MonoBehaviour
             }
         }
         grab = Input.GetButton("Fire3");
+		
+		if (Input.GetKeyDown("m") && GSD.hasMap)
+		{
+			Map.SetActive(!Map.activeSelf);
+		}
     }
 
 
