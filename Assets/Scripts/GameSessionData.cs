@@ -16,4 +16,7 @@ public class GameSessionData : ScriptableObject
 	public bool hasTargetKey;
 	public bool hasHelm;
 	public bool hasSecondKey;
+	public bool hasCarrot;
+	public bool hasCoin;
+	public bool hasPotion;
 }

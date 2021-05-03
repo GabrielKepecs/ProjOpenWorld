@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7746205581595828465}
   - component: {fileID: 7746205581595828234}
   - component: {fileID: 7746205581595828235}
-  - component: {fileID: 7746205581595828232}
+  - component: {fileID: 2396541041495764618}
   m_Layer: 0
   m_Name: IA
   m_TagString: Untagged
@@ -102,6 +102,10 @@ MonoBehaviour:
   timetowait: 3
   distancetotrigger: 10
   distancetoattack: 3
+  dead: 0
+  creatureType: Enemy
+  baseSpeed: 3.5
+  berserkSpeed: 3.5
   currentState: 0
 --- !u!54 &7746205581595828235
 Rigidbody:
@@ -119,7 +123,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7746205581595828232
+--- !u!114 &2396541041495764618
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,7 +151,11 @@ PrefabInstance:
     - target: {fileID: 388476415, guid: 7df524699deb44341b3693c8538df185, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: e58bf4525b7cc80459d6f7ff033ea067, type: 2}
+      objectReference: {fileID: 9100000, guid: 2fd167ffe419ed24a9f0a2f4219366d9, type: 2}
+    - target: {fileID: 388476416, guid: 7df524699deb44341b3693c8538df185, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 388476416, guid: 7df524699deb44341b3693c8538df185, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -161,6 +169,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 388476416, guid: 7df524699deb44341b3693c8538df185, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 388476416, guid: 7df524699deb44341b3693c8538df185, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -170,14 +182,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 388476416, guid: 7df524699deb44341b3693c8538df185, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 388476416, guid: 7df524699deb44341b3693c8538df185, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 388476416, guid: 7df524699deb44341b3693c8538df185, type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 388476416, guid: 7df524699deb44341b3693c8538df185, type: 3}

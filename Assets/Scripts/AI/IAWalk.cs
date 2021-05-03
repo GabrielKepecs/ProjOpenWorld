@@ -23,7 +23,16 @@ public class IAWalk : MonoBehaviour
         Dying,
         Patrol,
     }
+	public bool dead;
+	
+	public string creatureType;
+	public float baseSpeed;
+	public float berserkSpeed;
+	
+	public Vector3 runTo;
 
+	public GameObject Drop;
+	
     public IaState currentState;
     // Start is called before the first frame update
     void Start()
@@ -76,8 +85,9 @@ public class IAWalk : MonoBehaviour
             patrolposition = new Vector3(transform.position.x + Random.Range(-patrolDistance, patrolDistance), transform.position.y, transform.position.z + Random.Range(-patrolDistance, patrolDistance));
         }
         //ditancia do jogador for menor q distancetotrigger
-        if (Vector3.Distance(transform.position, target.transform.position) < distancetotrigger)
+        if (Vector3.Distance(transform.position, target.transform.position) < distancetotrigger && creatureType != "NPC")
         {
+			agent.speed = berserkSpeed;
             currentState = IaState.Berserk;
         }
 
@@ -96,7 +106,15 @@ public class IAWalk : MonoBehaviour
     void Berserk()
     {
         agent.isStopped = false;
-        agent.SetDestination(target.transform.position);
+		if(creatureType == "Enemy")
+			agent.SetDestination(target.transform.position);
+		else if(creatureType == "Critter")
+		{
+			runTo = new Vector3((2*transform.position.x) - target.transform.position.x,
+								(2*transform.position.y) - target.transform.position.y,
+								(2*transform.position.z) - target.transform.position.z);
+			agent.SetDestination(runTo);
+		}
         anim.SetBool("Attack", false);
         //se a distancia dele for  menor q 3 ele ataca
         if (Vector3.Distance(transform.position, target.transform.position) < distancetoattack)
@@ -107,6 +125,7 @@ public class IAWalk : MonoBehaviour
         //se a distancia dele for  maior q o trigger ele patrulha de novo 
         if (Vector3.Distance(transform.position, target.transform.position) > distancetotrigger)
         {
+			agent.speed = baseSpeed;
             currentState = IaState.Patrol;
         }
     }
@@ -115,6 +134,7 @@ public class IAWalk : MonoBehaviour
     {
         agent.isStopped = true;
         anim.SetBool("Attack", true);
+		
         //se o jogador se afastar ele volta a perseguir
         if (Vector3.Distance(transform.position, target.transform.position) > distancetoattack+2)
         {
@@ -132,7 +152,12 @@ public class IAWalk : MonoBehaviour
     {
         agent.isStopped = true;
         anim.SetBool("Attack", false);
-        anim.SetBool("Die",true);
+		if(!dead)
+		{
+			anim.SetTrigger("Die");
+			Instantiate(Drop, transform.position, Quaternion.identity);
+			dead = true;
+		}
         Destroy(gameObject, 3);
     }
 }
