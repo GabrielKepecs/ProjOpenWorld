@@ -6,6 +6,8 @@ public class GiveMap : MonoBehaviour
 {
 	[SerializeField]
 	GameSessionData GSD;
+	[SerializeField]
+	InventoryScript IS;
 	
 	[SerializeField]
     IAWalk iawalk;
@@ -21,6 +23,7 @@ public class GiveMap : MonoBehaviour
 		if(playerDistance < 3 && Input.GetKeyDown("e") && !GSD.hasMap)
 		{
 			GSD.hasMap = true;
+			IS.EnableMap();
 		}
     }
 }

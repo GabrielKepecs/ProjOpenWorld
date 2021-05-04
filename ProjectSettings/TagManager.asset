@@ -12,6 +12,8 @@ TagManager:
   - Box
   - Helmet
   - Key2
+  - Carrot
+  - Shield
   layers:
   - Default
   - TransparentFX

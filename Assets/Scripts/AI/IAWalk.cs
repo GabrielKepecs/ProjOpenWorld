@@ -22,12 +22,19 @@ public class IAWalk : MonoBehaviour
         Damage,
         Dying,
         Patrol,
+		Jump,
     }
 	public bool dead;
 	
 	public string creatureType;
 	public float baseSpeed;
 	public float berserkSpeed;
+	public float deathTimer = 3;
+	
+	public bool canJump;
+	public bool jumping, stopJump;
+	public Rigidbody rigid;
+	public float jumpTimer = 0.1f, maxJT = 0.1f;
 	
 	public Vector3 runTo;
 
@@ -64,6 +71,9 @@ public class IAWalk : MonoBehaviour
             case IaState.Patrol:
                 Patrol();
                 break;
+			case IaState.Jump:
+				Jump();
+				break;
         }
 
         anim.SetFloat("Velocity", agent.velocity.magnitude);
@@ -89,7 +99,10 @@ public class IAWalk : MonoBehaviour
         if (Vector3.Distance(transform.position, target.transform.position) < distancetotrigger && creatureType != "NPC")
         {
 			agent.speed = berserkSpeed;
-            currentState = IaState.Berserk;
+			if(canJump)
+				currentState = IaState.Jump;
+			else
+				currentState = IaState.Berserk;
         }
 
     }
@@ -160,6 +173,37 @@ public class IAWalk : MonoBehaviour
 				Instantiate(Drop, transform.position, Quaternion.identity);
 			dead = true;
 		}
-        Destroy(gameObject, 3);
+        Destroy(gameObject, deathTimer);
     }
+	void Jump()
+	{
+		agent.SetDestination(target.transform.position);
+		
+		if(!jumping)
+		{
+			//desativa o agent
+			agent.isStopped = true;
+			agent.updatePosition = false;
+			agent.updateRotation = false;
+		
+			//ativa o movimento do rigid e faz a aranha pular
+			rigid.isKinematic = false;
+			rigid.AddRelativeForce(new Vector3(0, 0.2f, 0.18f), ForceMode.Impulse);
+			
+			//pra evitar bugs
+			jumpTimer -= Time.deltaTime;
+			if(jumpTimer < 0)
+			{
+				jumpTimer = maxJT;
+				jumping = true;
+			}
+		}
+		
+		if(stopJump)//acontece quando a aranha toca no chao pelo AIJumpCollision
+		{
+			jumping = false;
+			stopJump = false;
+			currentState = IaState.Berserk;
+		}
+	}
 }

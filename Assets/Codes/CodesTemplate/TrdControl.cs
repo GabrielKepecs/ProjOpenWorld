@@ -27,7 +27,9 @@ public class TrdControl : MonoBehaviour
 	Vector3 initialSpawnLocation;//(315, 15, 400)
 	
 	[SerializeField]
-	GameObject Helmet, Map;
+	GameObject Helmet, Shield, Potion;
+	
+	public float moveMod = 1;
 	
     float ikforce = 0;
     bool grab = false;
@@ -91,6 +93,8 @@ public class TrdControl : MonoBehaviour
 		
 		if(GSD.hasBoots) mayFly = true;
 		if(GSD.hasHelm) EnableHelm();
+		if(GSD.hasCarrot) moveMod = 1.3f;
+		if(GSD.hasShield) EnableShield();
     }
 
     public void SetDummyCam(GameObject dummy)
@@ -138,11 +142,6 @@ public class TrdControl : MonoBehaviour
             }
         }
         grab = Input.GetButton("Fire3");
-		
-		if (Input.GetKeyDown("m") && GSD.hasMap)
-		{
-			Map.SetActive(!Map.activeSelf);
-		}
     }
 
 
@@ -152,7 +151,7 @@ public class TrdControl : MonoBehaviour
         float vel = rdb.velocity.magnitude;
 
         //limite de velocidade
-        rdb.AddForce((move * forcemove)/ (vel*2+1));
+        rdb.AddForce((move * forcemove * moveMod)/ (vel*2+1));
         anim.SetFloat("Velocity", vel);
 
         //velocidade sem y
@@ -343,5 +342,13 @@ public class TrdControl : MonoBehaviour
 	public void EnableHelm()
 	{
 		Helmet.SetActive(true);
+	}
+	public void EnableShield()
+	{
+		Shield.SetActive(true);
+	}
+	public void EnablePotion()
+	{
+		Potion.SetActive(true);
 	}
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameSessionData : ScriptableObject
 {
 	public Vector3 playerPosition;
-	//default main game: 315, 15, 400
+	//default main game: 365, 5.3, 157
 	//default shrines: 0, 0, 0
 	
 	public bool spawned;

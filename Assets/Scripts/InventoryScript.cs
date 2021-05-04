@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryScript : MonoBehaviour
 {
 	[SerializeField]
-	GameObject Boot, Key1, Key2, Helm;
+	GameObject Boot, Key1, Key2, Helm, Carrot, Potion, Map, Shield, MapImg;
+	[SerializeField]
+	Text txt;
 	[SerializeField]
 	public GameSessionData GSD;
 	
@@ -20,7 +23,25 @@ public class InventoryScript : MonoBehaviour
 			EnableKey2();
 		if(GSD.hasHelm)
 			EnableHelm();
+		if(GSD.hasCarrot)
+			EnableCarrot();
+		if(GSD.hasPotion)
+			EnablePotion();
+		if(GSD.hasShield)
+			EnableShield();
+		if(GSD.hasMap)
+			EnableMap();
     }
+	
+	void Update()
+	{
+		txt.text = GSD.coins.ToString();
+		
+		if (Input.GetKeyDown(KeyCode.M) && GSD.hasMap)
+		{
+			Map.SetActive(!Map.activeSelf);
+		}
+	}
 
     public void EnableBoot()
 	{
@@ -37,5 +58,21 @@ public class InventoryScript : MonoBehaviour
 	public void EnableHelm()
 	{
 		Helm.SetActive(true);
+	}
+	public void EnableCarrot()
+	{
+		Carrot.SetActive(true);
+	}
+	public void EnablePotion()
+	{
+		Potion.SetActive(true);
+	}
+	public void EnableShield()
+	{
+		Shield.SetActive(true);
+	}
+	public void EnableMap()
+	{
+		MapImg.SetActive(true);
 	}
 }

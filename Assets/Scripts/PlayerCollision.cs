@@ -48,5 +48,17 @@ public class PlayerCollision : MonoBehaviour
 		{
 			IS.EnableKey2();
 		}
+		
+		if(other.gameObject.tag == "Carrot")
+		{
+			IS.EnableCarrot();
+			TrdC.moveMod = 1.3f;
+		}
+		
+		if(other.gameObject.tag == "Shield")
+		{
+			TrdC.EnableShield();
+			IS.EnableShield();
+		}
 	}
 }
