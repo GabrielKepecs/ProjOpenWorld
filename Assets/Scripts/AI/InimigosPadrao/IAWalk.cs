@@ -96,7 +96,7 @@ public class IAWalk : MonoBehaviour
             patrolposition = new Vector3(transform.position.x + Random.Range(-patrolDistance, patrolDistance), transform.position.y, transform.position.z + Random.Range(-patrolDistance, patrolDistance));
         }
         //ditancia do jogador for menor q distancetotrigger
-        if (Vector3.Distance(transform.position, target.transform.position) < distancetotrigger && creatureType != "NPC")
+        if (Vector3.Distance(transform.position, target.transform.position) < distancetotrigger)
         {
 			agent.speed = berserkSpeed;
 			if(canJump)
@@ -131,7 +131,7 @@ public class IAWalk : MonoBehaviour
 		}
         anim.SetBool("Attack", false);
         //se a distancia dele for  menor q 3 ele ataca
-        if (Vector3.Distance(transform.position, target.transform.position) < distancetoattack)
+        if (Vector3.Distance(transform.position, target.transform.position) < distancetoattack && creatureType != "Critter")
         {
             currentState = IaState.Attack;
         }
@@ -147,7 +147,10 @@ public class IAWalk : MonoBehaviour
     void Attack()
     {
         agent.isStopped = true;
-        anim.SetBool("Attack", true);
+		if(creatureType == "Enemy")
+		{
+			anim.SetBool("Attack", true);
+		}
 		
         //se o jogador se afastar ele volta a perseguir
         if (Vector3.Distance(transform.position, target.transform.position) > distancetoattack+2)

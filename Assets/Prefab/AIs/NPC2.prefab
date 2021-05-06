@@ -45,7 +45,7 @@ Transform:
   m_GameObject: {fileID: 4574723005706635152}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 313.76566, y: 15.00415, z: 406.13113}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 4570581465431490468}
   m_Father: {fileID: 0}
@@ -150,6 +150,13 @@ MonoBehaviour:
   creatureType: NPC
   baseSpeed: 3.5
   berserkSpeed: 3.5
+  deathTimer: 3
+  canJump: 0
+  jumping: 0
+  stopJump: 0
+  rigid: {fileID: 0}
+  jumpTimer: 0.1
+  maxJT: 0.1
   runTo: {x: 0, y: 0, z: 0}
   dropsItem: 0
   Drop: {fileID: 0}
@@ -167,6 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GSD: {fileID: 11400000, guid: 7235404cdd02aa4418d58cce99c7d38e, type: 2}
+  IS: {fileID: 0}
   iawalk: {fileID: 4574723005706635154}
   playerDistance: 0
 --- !u!1001 &4574723005869357160
