@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossDamage : MonoBehaviour
 {
-	public int health;
+	public int health = 30;
 	public BossMove BM;
 	
     private void OnCollisionEnter(Collision other)
