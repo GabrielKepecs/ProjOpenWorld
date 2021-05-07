@@ -7278,7 +7278,7 @@ MonoBehaviour:
   atkEffectTimer: 0
   BossProjectile: {fileID: 2647362280011540647, guid: dd3c0216d0d2c564b9a6c329ec0b0f42,
     type: 3}
-  bulletSpawnTimer: 1.3
+  bulletSpawnTimer: 1
   deathTimer: 3
   dying: 0
 --- !u!114 &1993352732

@@ -174,11 +174,14 @@ public class BossMove : MonoBehaviour
 			atkEffectTimer = bulletSpawnTimer;
 			
 			atkStarted = true;
+			atkEnd = false;
 		}
 		
 		if(atkEffectTimer > 0)
 		{
 			atkEffectTimer -= Time.deltaTime;
+			
+			Rotate();
 		}
 		else
 		{
@@ -195,9 +198,11 @@ public class BossMove : MonoBehaviour
 			{
 				for(var i = 0; i < 5; i++)
 				{
-					Instantiate(BossProjectile,
-								transform.position + new Vector3(2 - i, 1, 1),
-								transform.rotation);
+					GameObject Bullet = Instantiate(BossProjectile,
+										transform.position,
+										transform.rotation);
+					Vector3 spawnPoint = transform.TransformDirection(2 - i, 1, 1);
+					Bullet.transform.position = Bullet.transform.position + spawnPoint;
 				}
 				
 				atkEnd = true;
@@ -211,5 +216,12 @@ public class BossMove : MonoBehaviour
 		{
 			
 		}
+	}
+	
+	void Rotate()
+	{
+		Vector3 direction = (target.transform.position - transform.position).normalized;
+		Quaternion lookRotation = Quaternion.LookRotation(direction);
+		transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 6);
 	}
 }

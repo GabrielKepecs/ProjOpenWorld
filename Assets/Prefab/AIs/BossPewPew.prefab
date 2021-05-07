@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigid: {fileID: 2647362280011540653}
-  shootTimer: 1
+  shootTimer: 0.4
   lifeTime: 2
   hForce: 30
   vForce: 3
