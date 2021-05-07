@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PotionSeller : MonoBehaviour
 {
@@ -12,8 +13,15 @@ public class PotionSeller : MonoBehaviour
 	TrdControl TrdC;
 	
 	[SerializeField]
+	GameObject TextBox;
+	[SerializeField]
+	Text txt;
+	
+	[SerializeField]
     IAWalk iawalk;
 	
+	[SerializeField]
+	bool playerNearby, potionReceived, thisNPC;
 	[SerializeField]
 	float playerDistance;
 
@@ -22,12 +30,29 @@ public class PotionSeller : MonoBehaviour
     {
         playerDistance = Vector3.Distance(iawalk.target.transform.position, transform.position);
 		
-		if(playerDistance < 3 && Input.GetKeyDown("e") && GSD.coins > 0 && !GSD.hasPotion)
+		if(playerDistance < 3) playerNearby = true;
+		else playerNearby = false;
+		
+		if(playerNearby && !TextBox.activeSelf && !potionReceived)
+		{
+			TextBox.SetActive(true);
+			txt.text = "Press E to trade one coin for a potion.";
+			thisNPC = true;
+		}
+		else if(!playerNearby && TextBox.activeSelf && thisNPC)
+		{
+			TextBox.SetActive(false);
+			thisNPC = false;
+		}
+		
+		if(playerNearby && Input.GetKeyDown("e") && GSD.coins > 0 && !GSD.hasPotion)
 		{
 			GSD.coins--;
 			GSD.hasPotion = true;
 			IS.EnablePotion();
 			TrdC.EnablePotion();
+			
+			potionReceived = true;
 		}
     }
 }

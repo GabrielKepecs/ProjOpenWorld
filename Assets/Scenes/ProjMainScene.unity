@@ -1040,6 +1040,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &943122303 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8213176517905959501, guid: e19f7456076b8b6429256b627dd48717,
+    type: 3}
+  m_PrefabInstance: {fileID: 5413080025360953668}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &982084989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: e3b709b2e74811449870887b21c8d350,
@@ -2085,6 +2097,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bb7ce6b80583c4ca38c881e5aa7a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1881995975 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2973671474175866280, guid: e19f7456076b8b6429256b627dd48717,
+    type: 3}
+  m_PrefabInstance: {fileID: 5413080025360953668}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1886939439
 GameObject:
   m_ObjectHideFlags: 0
@@ -2507,9 +2525,19 @@ PrefabInstance:
       objectReference: {fileID: 1784192439}
     - target: {fileID: 1189401958503219808, guid: 8952697f36afc5c4e82c4b8dc27f422a,
         type: 3}
+      propertyPath: txt
+      value: 
+      objectReference: {fileID: 943122303}
+    - target: {fileID: 1189401958503219808, guid: 8952697f36afc5c4e82c4b8dc27f422a,
+        type: 3}
       propertyPath: TrdC
       value: 
       objectReference: {fileID: 680617034}
+    - target: {fileID: 1189401958503219808, guid: 8952697f36afc5c4e82c4b8dc27f422a,
+        type: 3}
+      propertyPath: TextBox
+      value: 
+      objectReference: {fileID: 1881995975}
     - target: {fileID: 1189401958503219809, guid: 8952697f36afc5c4e82c4b8dc27f422a,
         type: 3}
       propertyPath: m_RootOrder
@@ -2747,6 +2775,16 @@ PrefabInstance:
       propertyPath: IS
       value: 
       objectReference: {fileID: 1784192439}
+    - target: {fileID: 4574723005706635155, guid: f4dd3fdd030087e4eb6d4622c4fdfcdf,
+        type: 3}
+      propertyPath: txt
+      value: 
+      objectReference: {fileID: 943122303}
+    - target: {fileID: 4574723005706635155, guid: f4dd3fdd030087e4eb6d4622c4fdfcdf,
+        type: 3}
+      propertyPath: TextBox
+      value: 
+      objectReference: {fileID: 1881995975}
     - target: {fileID: 4574723005706635160, guid: f4dd3fdd030087e4eb6d4622c4fdfcdf,
         type: 3}
       propertyPath: m_RootOrder

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GiveMap : MonoBehaviour
 {
@@ -10,8 +11,15 @@ public class GiveMap : MonoBehaviour
 	InventoryScript IS;
 	
 	[SerializeField]
+	GameObject TextBox;
+	[SerializeField]
+	Text txt;
+	
+	[SerializeField]
     IAWalk iawalk;
 	
+	[SerializeField]
+	bool playerNearby, mapReceived, thisNPC;
 	[SerializeField]
 	float playerDistance;
 
@@ -20,10 +28,27 @@ public class GiveMap : MonoBehaviour
     {
         playerDistance = Vector3.Distance(iawalk.target.transform.position, transform.position);
 		
-		if(playerDistance < 3 && Input.GetKeyDown("e") && !GSD.hasMap)
+		if(playerDistance < 3) playerNearby = true;
+		else playerNearby = false;
+		
+		if(playerNearby && !TextBox.activeSelf && !mapReceived)
+		{
+			TextBox.SetActive(true);
+			txt.text = "Press E to receive a map.";
+			thisNPC = true;
+		}
+		else if(!playerNearby && TextBox.activeSelf && thisNPC)
+		{
+			thisNPC = false;
+			TextBox.SetActive(false);
+		}
+		
+		if(playerNearby && Input.GetKeyDown("e") && !GSD.hasMap)
 		{
 			GSD.hasMap = true;
 			IS.EnableMap();
+			
+			mapReceived = true;
 		}
     }
 }
