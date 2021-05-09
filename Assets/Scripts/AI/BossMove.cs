@@ -27,16 +27,22 @@ public class BossMove : MonoBehaviour
 		Summon,
 		Barrage,
 		Cleave,
+		
+		Test,
     }
 	public BossState currentState;
 	public int phase;
 	
-	public float repositionSpeed;
-	public float chargeStartSpeed, chargeSpeed;
+	public float baseSpeed, repositionSpeed, chargeSpeed;
 	public float chargeTimer;
+	public int reposPoint;
+	public Vector3 pointA, pointB, pointC;
 	public Vector3 repositionTarget, idlePosition;
 	
 	public float chargeAtkDistance;
+	public Transform swordTransform;
+	public float lerpTimer;
+	public float baseSwordY, chargeAtkSwordY;
 	
 	public float stunTimer, maxStunTimer;
 	public bool stunned;
@@ -82,20 +88,24 @@ public class BossMove : MonoBehaviour
 			case BossState.Charge:
 				Charge();
 				break;
-			/*case BossState.Reposition:
+			case BossState.Reposition:
 				Reposition();
 				break;
 				
-			case BossState.Barrage:
-				Barrage():
+			/*case BossState.Barrage:
+				Barrage();
 				break;
 			case BossState.Cleave:
-				Cleave():
+				Cleave();
 				break;
 			
 			case BossState.Summon:
-				Summon():
+				Summon();
 				break;*/
+				
+			case BossState.Test:
+				Test();
+				break;
         }
 
         anim.SetFloat("Velocity", agent.velocity.magnitude);
@@ -116,6 +126,8 @@ public class BossMove : MonoBehaviour
 	void Combat()
 	{
 		anim.SetInteger("Attack", 0);
+		
+		agent.SetDestination(transform.position);
 		
 		if (Vector3.Distance(transform.position, target.transform.position) > aggroDistance)
         {
@@ -165,7 +177,7 @@ public class BossMove : MonoBehaviour
 	
 	void Shoot()
 	{
-		if(!atkStarted)
+		if(!atkStarted)//variaveis usadas
 		{
 			anim.SetInteger("Attack", 1);
 			anim.SetTrigger("AttackStart");
@@ -177,16 +189,16 @@ public class BossMove : MonoBehaviour
 			atkEnd = false;
 		}
 		
-		if(atkEffectTimer > 0)
+		if(atkEffectTimer > 0)//durante a animacao de ataque
 		{
 			atkEffectTimer -= Time.deltaTime;
 			
 			Rotate();
 		}
-		else
+		else//quando o boss vai atirar
 		{
 			atkEndTimer -= Time.deltaTime;
-			if(atkEndTimer <= 0)
+			if(atkEndTimer <= 0)//fim do ataque
 			{
 				atkStarted = false;
 				anim.SetTrigger("ReturnToIdle");
@@ -194,7 +206,7 @@ public class BossMove : MonoBehaviour
 				currentState = BossState.Combat;
 			}
 			
-			if(!atkEnd)
+			if(!atkEnd)//tiro
 			{
 				for(var i = 0; i < 5; i++)
 				{
@@ -214,7 +226,96 @@ public class BossMove : MonoBehaviour
 	{
 		if(!atkStarted)
 		{
+			agent.SetDestination(target.transform.position);//vai ate o player
+			agent.speed = baseSpeed;
 			
+			atkEffectTimer = 1;
+			atkEndTimer = chargeTimer;
+			lerpTimer = 0;
+			
+			atkStarted = true;
+			atkEnd = false;
+		}
+		
+		if(atkEffectTimer > 0)//start up do charge
+		{
+			atkEffectTimer -= Time.deltaTime;
+		}
+		else
+		{
+			atkEndTimer -= Time.deltaTime;
+			if(atkEndTimer <= 0)
+			{
+				atkStarted = false;
+				anim.SetTrigger("ReturnToIdle");
+				
+				currentState = BossState.Reposition;
+			}
+			
+			if(!atkEnd)
+			{
+				agent.speed = chargeSpeed;//investida
+				//se o jogador estiver perto, ataca
+				if (Vector3.Distance(transform.position, target.transform.position) < chargeAtkDistance)
+				{
+					agent.SetDestination(transform.position);
+					
+					anim.SetInteger("Attack", 2);
+					anim.SetTrigger("AttackStart");
+					
+					atkEndTimer = 2;
+					atkEnd = true;
+				}
+			}
+			else
+			{
+				SwordSizeChange(1, baseSwordY, chargeAtkSwordY);//aumenta o tamanho da espada
+			}
+		}
+	}
+	
+	void Reposition()
+	{
+		if(!atkStarted)
+		{
+			agent.speed = repositionSpeed;
+			
+			atkEffectTimer = 1;
+			lerpTimer = 0;
+			
+			atkStarted = true;
+			
+			reposPoint = Random.Range(0, 3);
+			switch(reposPoint)
+			{
+				case 0:
+				repositionTarget = pointA;
+				break;
+				
+				case 1:
+				repositionTarget = pointB;
+				break;
+				
+				case 2:
+				repositionTarget = pointC;
+				break;
+			}
+			agent.SetDestination(repositionTarget);
+		}
+		//atkEndTimer <=0 agent.speed = baseSpeed;
+		
+		if(atkEffectTimer > 0)
+		{
+			atkEffectTimer -= Time.deltaTime;
+			
+			SwordSizeChange(1, chargeAtkSwordY, baseSwordY);//diminui o tamanho da espada
+		}
+		
+		if(Vector3.Distance(transform.position, repositionTarget) < 1)
+		{
+			atkStarted = false;
+			
+			currentState = BossState.Combat;
 		}
 	}
 	
@@ -223,5 +324,19 @@ public class BossMove : MonoBehaviour
 		Vector3 direction = (target.transform.position - transform.position).normalized;
 		Quaternion lookRotation = Quaternion.LookRotation(direction);
 		transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 6);
+	}
+	
+	void SwordSizeChange(float lerpDuration, float initialSize, float endSize)
+	{
+		if(lerpTimer < lerpDuration)
+			lerpTimer += Time.deltaTime;
+		
+		swordTransform.localScale = new Vector3
+						(1, Mathf.Lerp(initialSize, endSize, lerpTimer / lerpDuration), 1);
+	}
+	
+	void Test()
+	{
+		
 	}
 }
