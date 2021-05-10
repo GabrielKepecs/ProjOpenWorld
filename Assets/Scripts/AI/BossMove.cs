@@ -9,6 +9,8 @@ public class BossMove : MonoBehaviour
     public GameObject target;
     public Animator anim;
 	
+	public TrdControl TC;
+	
 	public float aggroDistance;
 	
 	public int summonCharges, barrageCharges;
@@ -34,15 +36,15 @@ public class BossMove : MonoBehaviour
 	public int phase;
 	
 	public float baseSpeed, repositionSpeed, chargeSpeed;
-	public float chargeTimer;
-	public int reposPoint;
+	public float chargeTimer, cleaveTimer;
+	public int reposPoint, cleaveAtkType;
 	public Vector3 pointA, pointB, pointC;
 	public Vector3 repositionTarget, idlePosition;
 	
 	public float chargeAtkDistance;
 	public Transform swordTransform;
 	public float lerpTimer;
-	public float baseSwordY, chargeAtkSwordY;
+	public float baseSwordY, chargeAtkSwordY, cleaveSwordY, baseSwordThick, cleaveSwordThick;
 	
 	public float stunTimer, maxStunTimer;
 	public bool stunned;
@@ -52,8 +54,9 @@ public class BossMove : MonoBehaviour
 	public bool atkEnd;
 	public float atkEffectTimer;
 	
-	public GameObject BossProjectile;
-	public float bulletSpawnTimer;
+	public GameObject BossProjectile, BossHomingPrjct;
+	public float bulletSpawnTimer, barrageTimer;
+	public int barrageUses;
 	
 	public float deathTimer;
 	public bool dying;
@@ -92,14 +95,14 @@ public class BossMove : MonoBehaviour
 				Reposition();
 				break;
 				
-			/*case BossState.Barrage:
+			case BossState.Barrage:
 				Barrage();
 				break;
 			case BossState.Cleave:
 				Cleave();
 				break;
 			
-			case BossState.Summon:
+			/*case BossState.Summon:
 				Summon();
 				break;*/
 				
@@ -182,7 +185,7 @@ public class BossMove : MonoBehaviour
 			anim.SetInteger("Attack", 1);
 			anim.SetTrigger("AttackStart");
 			
-			atkEndTimer = 2;
+			atkEndTimer = 3;
 			atkEffectTimer = bulletSpawnTimer;
 			
 			atkStarted = true;
@@ -319,6 +322,132 @@ public class BossMove : MonoBehaviour
 		}
 	}
 	
+	void Barrage()
+	{
+		if(!atkStarted)
+		{
+			anim.SetInteger("Attack", 3);
+			
+			atkEffectTimer = barrageTimer;
+			atkEndTimer = 2;
+			barrageUses = 4;
+			
+			atkStarted = true;
+			atkEnd = false;
+		}
+		
+		if(atkEffectTimer >= 0)
+		{
+			atkEffectTimer -= Time.deltaTime;
+			
+			Rotate();
+			
+			if(!atkEnd && barrageUses > 0)
+			{
+				anim.SetTrigger("AttackStart");
+				atkEnd = true;
+			}
+		}
+		else if(atkEffectTimer < 0 && barrageUses > 0)
+		{
+			atkEnd = false;
+			
+			GameObject Bullet = Instantiate(BossHomingPrjct,
+											transform.position,
+											transform.rotation);
+			Vector3 spawnPoint = transform.TransformDirection(2, 2, 1);
+			Bullet.transform.position = Bullet.transform.position + spawnPoint;
+			
+			atkEffectTimer = barrageTimer;
+			barrageUses--;
+		}
+		else
+		{
+			atkEndTimer -= Time.deltaTime;
+			if(atkEndTimer <= 0)
+			{
+				atkStarted = false;
+				anim.SetTrigger("ReturnToIdle");
+				
+				currentState = BossState.Combat;
+			}
+		}
+	}
+	
+	void Cleave()
+	{
+		if(!atkStarted)
+		{
+			anim.SetTrigger("CleaveAlert");
+			
+			atkEffectTimer = 3;
+			atkEndTimer = cleaveTimer;
+			barrageUses = 6;
+			lerpTimer = 0;
+			cleaveAtkType = 0;
+			
+			atkStarted = true;
+			atkEnd = false;
+		}
+		
+		if(atkEffectTimer > 0)
+		{
+			atkEffectTimer -= Time.deltaTime;
+			
+			CleaveSizeChange(2, baseSwordY, cleaveSwordY, baseSwordThick, cleaveSwordThick);
+		}
+		else
+		{
+			Rotate();
+			
+			if(Vector3.Distance(transform.position, target.transform.position) < 4)
+			{
+				//stun no player
+				//TC.GetPushed(10);//empurra o player de volta pro range do boss
+			}
+			
+			atkEndTimer -= Time.deltaTime;
+			if(atkEndTimer <= 0 && barrageUses <= 0)
+			{
+				atkStarted = false;
+				
+				currentState = BossState.Stunned;
+			}
+			
+			else if(atkEndTimer <= 0 && barrageUses > 0)
+			{
+				atkEndTimer = cleaveTimer;
+				barrageUses--;
+				
+				switch(cleaveAtkType)//faz o boss atacar em um padrao
+				{
+					case 0:
+					cleaveAtkType++;
+					anim.SetInteger("Attack", 2);
+					anim.SetTrigger("AttackStart");
+					break;
+					
+					case 1:
+					cleaveAtkType++;
+					anim.SetInteger("Attack", 5);
+					anim.SetTrigger("AttackStart");
+					break;
+					
+					case 2:
+					cleaveAtkType = 0;
+					anim.SetInteger("Attack", 4);
+					anim.SetTrigger("AttackStart");
+					break;
+				}
+			}
+			
+			if(barrageUses <= 0)
+			{
+				CleaveSizeChange(3, cleaveSwordY, baseSwordY, cleaveSwordThick, baseSwordThick);
+			}
+		}
+	}
+	
 	void Rotate()
 	{
 		Vector3 direction = (target.transform.position - transform.position).normalized;
@@ -333,6 +462,17 @@ public class BossMove : MonoBehaviour
 		
 		swordTransform.localScale = new Vector3
 						(1, Mathf.Lerp(initialSize, endSize, lerpTimer / lerpDuration), 1);
+	}
+	
+	void CleaveSizeChange(float lerpDuration, float initialSize, float endSize, float initialThickness, float endThickness)
+	{
+		if(lerpTimer < lerpDuration)
+			lerpTimer += Time.deltaTime;
+		
+		swordTransform.localScale = new Vector3
+						(Mathf.Lerp(initialThickness, endThickness, lerpTimer / lerpDuration),
+						 Mathf.Lerp(initialSize, endSize, lerpTimer / lerpDuration),
+						 Mathf.Lerp(initialThickness, endThickness, lerpTimer / lerpDuration));
 	}
 	
 	void Test()

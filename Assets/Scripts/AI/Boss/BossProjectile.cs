@@ -39,4 +39,12 @@ public class BossProjectile : MonoBehaviour
 			}
 		}
     }
+	
+	private void OnCollisionEnter(Collision other)
+	{
+		if (other.collider.CompareTag("PlayerProjectile"))
+		{
+			Destroy(gameObject);
+		}
+	}
 }

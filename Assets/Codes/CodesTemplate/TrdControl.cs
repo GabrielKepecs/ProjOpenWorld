@@ -351,4 +351,9 @@ public class TrdControl : MonoBehaviour
 	{
 		Potion.SetActive(true);
 	}
+	
+	public void GetPushed(float pushStr)
+	{
+		rdb.AddRelativeForce(Vector3.back * pushStr);
+	}
 }
