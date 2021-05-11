@@ -15,6 +15,7 @@ TagManager:
   - Carrot
   - Shield
   - BossProjectile
+  - Boss
   layers:
   - Default
   - TransparentFX

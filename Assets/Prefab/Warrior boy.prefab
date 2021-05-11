@@ -9917,6 +9917,8 @@ MonoBehaviour:
   Helmet: {fileID: 4259385126474660949}
   Shield: {fileID: 413160716495240566}
   Potion: {fileID: 8630387736301739035}
+  OriginalSword: {fileID: 8296172667491413351}
+  NewSword: {fileID: 6463179037447198091}
   moveMod: 1
   projetil: {fileID: 3076110161118753512, guid: 051802963d3077847bcaec206e3a0680,
     type: 3}
@@ -11412,8 +11414,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.28429118, y: 1.7782705, z: 0.10372271}
-  m_Center: {x: -0.018786246, y: 1.1115538, z: -0.0016220867}
+  m_Size: {x: 0.2610912, y: 1.7782708, z: 0.11342015}
+  m_Center: {x: -0.030386755, y: 1.1115501, z: 0.020501692}
 --- !u!82 &8679373911574231806
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11522,8 +11524,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6212b12dbac310448bf9051e34bb996a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metal: {fileID: 1943353059}
+  metal: {fileID: 8679373911574231806}
   spark: {fileID: 5012627961677551469}
+  user: Player
 --- !u!54 &1943353056
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11663,6 +11666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   metal: {fileID: 1943353059}
   spark: {fileID: 487294738}
+  user: Player
 --- !u!1001 &1731081326
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11957,6 +11961,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d1fefee6e110c6440b092ea8a3595b48,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: -396677188899151970, guid: d1fefee6e110c6440b092ea8a3595b48,
         type: 3}
       propertyPath: m_IsActive
@@ -12013,52 +12022,52 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 41f60e9a7de83f5418c05168bf233b37,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.1284
+      value: -0.1295
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41f60e9a7de83f5418c05168bf233b37,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0347
+      value: 0.0499
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41f60e9a7de83f5418c05168bf233b37,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.1119
+      value: 0.1112
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41f60e9a7de83f5418c05168bf233b37,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.38142365
+      value: -0.49762797
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41f60e9a7de83f5418c05168bf233b37,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.3263982
+      value: -0.46421507
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41f60e9a7de83f5418c05168bf233b37,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6366888
+      value: -0.5223465
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41f60e9a7de83f5418c05168bf233b37,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.58532697
+      value: -0.51383364
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41f60e9a7de83f5418c05168bf233b37,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -29.759
+      value: -4.289
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41f60e9a7de83f5418c05168bf233b37,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 91.57201
+      value: 88.66
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 41f60e9a7de83f5418c05168bf233b37,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 83.272
+      value: 87.646
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 41f60e9a7de83f5418c05168bf233b37,
         type: 3}
@@ -12175,6 +12184,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 81059c667b14fc34c9cd286782be2ed0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81059c667b14fc34c9cd286782be2ed0, type: 3}

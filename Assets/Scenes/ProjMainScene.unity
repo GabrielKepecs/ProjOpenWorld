@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000010, guid: 9ef587881c6900946990101127638052,
+  m_LightingDataAsset: {fileID: 112000000, guid: 9ef587881c6900946990101127638052,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -219,12 +219,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: PontesN
---- !u!198 &349784439 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 487294738, guid: 251eb8a247c6ff6438561641e12e3b89,
-    type: 3}
-  m_PrefabInstance: {fileID: 863675644}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &642864456 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: b0d1e77ffc38a8742ba365d9f75c402a,
@@ -283,8 +277,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6212b12dbac310448bf9051e34bb996a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metal: {fileID: 1985555530}
-  spark: {fileID: 349784439}
+  metal: {fileID: 649952295}
+  spark: {fileID: 1123513471}
+  user: Boss
 --- !u!82 &649952295
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1250,6 +1245,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &947092893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 947092894}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &947092894
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947092893}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 383.5, y: 5, z: 62.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &982084989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: e3b709b2e74811449870887b21c8d350,
@@ -7301,12 +7326,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: MSVila1
---- !u!82 &1985555530 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1943353059, guid: 251eb8a247c6ff6438561641e12e3b89,
-    type: 3}
-  m_PrefabInstance: {fileID: 863675644}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1993352730
 GameObject:
   m_ObjectHideFlags: 0
@@ -7323,7 +7342,7 @@ GameObject:
   - component: {fileID: 1993352734}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7344,11 +7363,8 @@ MonoBehaviour:
   target: {fileID: 680617031}
   anim: {fileID: 1363500995}
   TC: {fileID: 680617034}
-  aggroDistance: 40
-  summonCharges: 0
-  barrageCharges: 0
+  aggroDistance: 30
   currentState: 0
-  phase: 1
   baseSpeed: 3.5
   repositionSpeed: 5
   chargeSpeed: 8
@@ -7356,11 +7372,17 @@ MonoBehaviour:
   cleaveTimer: 1.2
   reposPoint: 0
   cleaveAtkType: 0
-  pointA: {x: 360, y: 5, z: 169}
-  pointB: {x: 365, y: 5, z: 175}
-  pointC: {x: 359, y: 5, z: 163}
+  pointA: {x: 377, y: 5, z: 72}
+  pointB: {x: 372.7, y: 5, z: 58}
+  pointC: {x: 383.5, y: 5, z: 62.4}
   repositionTarget: {x: 0, y: 0, z: 0}
-  idlePosition: {x: 364, y: 5, z: 164}
+  idlePosition: {x: 377.7, y: 5, z: 65}
+  nextAttack: 0
+  atkStartTimer: 0
+  maxASTimer: 0
+  maySummon: 0
+  barrageCharges: 0
+  cleaveCharges: 0
   chargeAtkDistance: 5
   swordTransform: {fileID: 939690535}
   lerpTimer: 0
@@ -7407,7 +7429,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1993352730}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 364, y: 5, z: 164}
+  m_LocalPosition: {x: 377.7, y: 5, z: 65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 124708062}
@@ -7427,7 +7449,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 160
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

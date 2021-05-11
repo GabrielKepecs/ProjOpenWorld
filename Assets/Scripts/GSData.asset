@@ -23,3 +23,4 @@ MonoBehaviour:
   hasPotion: 1
   hasMap: 1
   hasShield: 1
+  hasSword: 1

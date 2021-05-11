@@ -13,7 +13,7 @@ public class PlayerCollision : MonoBehaviour
 	
     private void OnCollisionEnter(Collision other)
 	{
-		if(other.gameObject.tag == "Water")
+		if(other.gameObject.tag == "Water" && !TrdC.GSD.hasSword)
 		{
 			if(playerTransf.position.x > 271)
 			{

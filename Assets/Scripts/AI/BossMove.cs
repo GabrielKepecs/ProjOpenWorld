@@ -13,8 +13,6 @@ public class BossMove : MonoBehaviour
 	
 	public float aggroDistance;
 	
-	public int summonCharges, barrageCharges;
-	
 	public enum BossState
     {
         Stopped,
@@ -33,13 +31,17 @@ public class BossMove : MonoBehaviour
 		Test,
     }
 	public BossState currentState;
-	public int phase;
 	
 	public float baseSpeed, repositionSpeed, chargeSpeed;
 	public float chargeTimer, cleaveTimer;
 	public int reposPoint, cleaveAtkType;
 	public Vector3 pointA, pointB, pointC;
 	public Vector3 repositionTarget, idlePosition;
+	
+	public int nextAttack;
+	public float atkStartTimer, maxASTimer;
+	public bool maySummon;
+	public int barrageCharges, cleaveCharges;
 	
 	public float chargeAtkDistance;
 	public Transform swordTransform;
@@ -102,9 +104,9 @@ public class BossMove : MonoBehaviour
 				Cleave();
 				break;
 			
-			/*case BossState.Summon:
+			case BossState.Summon:
 				Summon();
-				break;*/
+				break;
 				
 			case BossState.Test:
 				Test();
@@ -132,9 +134,51 @@ public class BossMove : MonoBehaviour
 		
 		agent.SetDestination(transform.position);
 		
-		if (Vector3.Distance(transform.position, target.transform.position) > aggroDistance)
+		if (Vector3.Distance(transform.position, target.transform.position) > aggroDistance + 10)
         {
 			currentState = BossState.Stopped;
+		}
+		
+		atkStartTimer -= Time.deltaTime;
+		if(atkStartTimer < 0)
+		{
+			atkStartTimer = maxASTimer;
+			
+			if(maySummon)
+			{
+				currentState = BossState.Summon;
+			}
+			else
+			{
+				if(nextAttack == 0)
+				{
+					nextAttack++;
+					
+					if(cleaveCharges > 0)
+					{
+						cleaveCharges--;
+						currentState = BossState.Cleave;
+					}
+					else
+					{
+						currentState = BossState.Charge;
+					}
+				}
+				else// if(nextAttack == 1)
+				{
+					nextAttack = 0;
+					
+					if(barrageCharges > 0)
+					{
+						barrageCharges--;
+						currentState = BossState.Barrage;
+					}
+					else
+					{
+						currentState = BossState.Shoot;
+					}
+				}
+			}
 		}
 	}
 	
@@ -229,7 +273,6 @@ public class BossMove : MonoBehaviour
 	{
 		if(!atkStarted)
 		{
-			agent.SetDestination(target.transform.position);//vai ate o player
 			agent.speed = baseSpeed;
 			
 			atkEffectTimer = 1;
@@ -242,6 +285,8 @@ public class BossMove : MonoBehaviour
 		
 		if(atkEffectTimer > 0)//start up do charge
 		{
+			agent.SetDestination(target.transform.position);//vai ate o player
+			
 			atkEffectTimer -= Time.deltaTime;
 		}
 		else
@@ -257,6 +302,7 @@ public class BossMove : MonoBehaviour
 			
 			if(!atkEnd)
 			{
+				agent.SetDestination(target.transform.position);
 				agent.speed = chargeSpeed;//investida
 				//se o jogador estiver perto, ataca
 				if (Vector3.Distance(transform.position, target.transform.position) < chargeAtkDistance)
@@ -446,6 +492,11 @@ public class BossMove : MonoBehaviour
 				CleaveSizeChange(3, cleaveSwordY, baseSwordY, cleaveSwordThick, baseSwordThick);
 			}
 		}
+	}
+	
+	void Summon()
+	{
+		
 	}
 	
 	void Rotate()

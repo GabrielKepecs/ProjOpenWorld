@@ -27,7 +27,7 @@ public class TrdControl : MonoBehaviour
 	Vector3 initialSpawnLocation;//(315, 15, 400)
 	
 	[SerializeField]
-	GameObject Helmet, Shield, Potion;
+	GameObject Helmet, Shield, Potion, OriginalSword, NewSword;
 	
 	public float moveMod = 1;
 	
@@ -95,6 +95,8 @@ public class TrdControl : MonoBehaviour
 		if(GSD.hasHelm) EnableHelm();
 		if(GSD.hasCarrot) moveMod = 1.3f;
 		if(GSD.hasShield) EnableShield();
+		
+		if(GSD.hasSword) SwitchSword();
     }
 
     public void SetDummyCam(GameObject dummy)
@@ -350,6 +352,12 @@ public class TrdControl : MonoBehaviour
 	public void EnablePotion()
 	{
 		Potion.SetActive(true);
+	}
+	
+	public void SwitchSword()
+	{
+		OriginalSword.SetActive(false);
+		NewSword.SetActive(true);
 	}
 	
 	public void GetPushed(float pushStr)

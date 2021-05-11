@@ -21,4 +21,6 @@ public class GameSessionData : ScriptableObject
 	public bool hasPotion;
 	public bool hasMap;
 	public bool hasShield;
+	
+	public bool hasSword;
 }
