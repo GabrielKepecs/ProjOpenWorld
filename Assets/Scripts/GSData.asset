@@ -23,4 +23,10 @@ MonoBehaviour:
   hasPotion: 1
   hasMap: 1
   hasShield: 1
-  hasSword: 1
+  hasSword: 0
+  swordPieces: 0
+  safira: 0
+  pomo: 0
+  lamina: 0
+  guarnicao: 0
+  cabo: 0

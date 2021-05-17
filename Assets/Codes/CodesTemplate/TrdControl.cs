@@ -144,6 +144,9 @@ public class TrdControl : MonoBehaviour
             }
         }
         grab = Input.GetButton("Fire3");
+		
+		if(Input.GetKeyDown(KeyCode.LeftShift) && GSD.hasSword)
+			SwitchSword();
     }
 
 
@@ -356,8 +359,8 @@ public class TrdControl : MonoBehaviour
 	
 	public void SwitchSword()
 	{
-		OriginalSword.SetActive(false);
-		NewSword.SetActive(true);
+		OriginalSword.SetActive(!OriginalSword.activeSelf);
+		NewSword.SetActive(!NewSword.activeSelf);
 	}
 	
 	public void GetPushed(float pushStr)

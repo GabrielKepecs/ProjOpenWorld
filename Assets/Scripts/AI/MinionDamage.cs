@@ -18,7 +18,7 @@ public class MinionDamage : MonoBehaviour
 			MM.currentState = MinionMove.MinionState.Dying;
 		}
 		
-		if(MM.jumping && other.gameObject.tag == "Ground")
+		if(MM.jumping && MM.minionType == "Jumper" && other.gameObject.tag == "Ground")
 		{
 			//faz o minion nao se teleportar de volta pro comeco do pulo
 			MM.agent.nextPosition = transform.position;

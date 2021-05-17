@@ -8,6 +8,7 @@ public class BossMove : MonoBehaviour
 	public NavMeshAgent agent;
     public GameObject target;
     public Animator anim;
+	public Rigidbody rigid;
 	
 	public TrdControl TC;
 	
@@ -56,9 +57,12 @@ public class BossMove : MonoBehaviour
 	public bool atkEnd;
 	public float atkEffectTimer;
 	
-	public GameObject BossProjectile, BossHomingPrjct;
+	public GameObject BossProjectile, BossHomingPrjct, ShadowMinion, FxBomb;
 	public float bulletSpawnTimer, barrageTimer;
 	public int barrageUses;
+	
+	public GameObject BossAsset;
+	public bool invulnerable;
 	
 	public float deathTimer;
 	public bool dying;
@@ -496,7 +500,55 @@ public class BossMove : MonoBehaviour
 	
 	void Summon()
 	{
+		if(!atkStarted)
+		{
+			agent.isStopped = true;
+			
+			anim.SetTrigger("SummonAlert");
+			
+			atkEffectTimer = 3;
+			barrageUses = 5;
+			
+			maySummon = false;
+			atkStarted = true;
+			atkEnd = false;
+		}
 		
+		if(atkEffectTimer >= 0)
+		{
+			atkEffectTimer -= Time.deltaTime;
+		}
+		else
+		{
+			if(!atkEnd)
+			{
+				invulnerable = true;
+				BossAsset.SetActive(false);
+				
+				Instantiate(FxBomb, transform.position, transform.rotation);
+				
+				for(var i = 0; i < barrageUses; i++)
+				{
+					GameObject Bullet = Instantiate(ShadowMinion,
+										transform.position,
+										transform.rotation);
+					Vector3 spawnPoint = transform.TransformDirection(2 - i, -1, 0);
+					Bullet.transform.position = Bullet.transform.position + spawnPoint;
+				}
+				
+				atkEnd = true;
+			}
+			
+			if(barrageUses <= 0)
+			{
+				invulnerable = false;
+				BossAsset.SetActive(true);
+				
+				atkStarted = false;
+				
+				currentState = BossState.Stunned;
+			}
+		}
 	}
 	
 	void Rotate()
@@ -524,6 +576,11 @@ public class BossMove : MonoBehaviour
 						(Mathf.Lerp(initialThickness, endThickness, lerpTimer / lerpDuration),
 						 Mathf.Lerp(initialSize, endSize, lerpTimer / lerpDuration),
 						 Mathf.Lerp(initialThickness, endThickness, lerpTimer / lerpDuration));
+	}
+	
+	void MinionDied()
+	{
+		barrageUses--;
 	}
 	
 	void Test()

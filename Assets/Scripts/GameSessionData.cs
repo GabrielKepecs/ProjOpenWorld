@@ -23,4 +23,6 @@ public class GameSessionData : ScriptableObject
 	public bool hasShield;
 	
 	public bool hasSword;
+	public int swordPieces;
+	public bool safira, pomo, lamina, guarnicao, cabo;
 }

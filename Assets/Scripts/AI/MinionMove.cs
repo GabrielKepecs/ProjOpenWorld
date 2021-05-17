@@ -9,6 +9,8 @@ public class MinionMove : MonoBehaviour
 	public Animator anim;
 	public Rigidbody rigid;
 	
+	public GameSessionData GSD;
+	
 	public Vector3 patrolposition;
 	public float stoppedTime;
     public float patrolDistance;//=10;
@@ -42,9 +44,9 @@ public class MinionMove : MonoBehaviour
 	public float jumpTimer, maxJT;
 	public float atkCD, maxAtkCD;
 	public float atkSpawnX, atkSpawnY, atkSpawnZ;
-	public GameObject Projectile, BasicShot, HomingShot;
+	public GameObject Projectile, BasicShot, HomingShot, Boss;
 	
-	public bool randomize;
+	public bool randomize, bossMinion;
 	public int randomizeType;
 	
     // Start is called before the first frame update
@@ -72,6 +74,12 @@ public class MinionMove : MonoBehaviour
 				minionType = "Flier";
 				break;
 			}
+		}
+		
+		if(bossMinion)
+		{
+			Boss = GameObject.FindWithTag("Boss");
+			target = GameObject.FindWithTag("Player");
 		}
     }
 
@@ -112,6 +120,8 @@ public class MinionMove : MonoBehaviour
 			Flying();
 			break;
 		}
+		
+		anim.SetFloat("Velocity", agent.velocity.magnitude);
     }
 	
 	void Stopped()
@@ -121,7 +131,14 @@ public class MinionMove : MonoBehaviour
 
         if (target && Vector3.Distance(transform.position, target.transform.position) > aggroDistance)
         {
+			agent.speed = baseSpeed;
             currentState = MinionState.Patrol;
+        }
+		
+		else if (target && Vector3.Distance(transform.position, target.transform.position) < aggroDistance)
+        {
+			agent.speed = aggroSpeed;
+			currentState = MinionState.Aggro;
         }
 		
 	}
@@ -208,6 +225,8 @@ public class MinionMove : MonoBehaviour
 		
 		if(!jumping)
 		{
+			anim.SetTrigger("Jump");
+			
 			//desativa o agent
 			agent.isStopped = true;
 			agent.updatePosition = false;
@@ -226,8 +245,12 @@ public class MinionMove : MonoBehaviour
 			}
 		}
 		
+		anim.SetFloat("JumpSpd", rigid.velocity.y);
+		
 		if(stopJump)//acontece quando a aranha toca no chao pelo AIJumpCollision
 		{
+			anim.SetTrigger("Jump");
+			
 			jumping = false;
 			stopJump = false;
 			currentState = MinionState.Aggro;
@@ -296,8 +319,51 @@ public class MinionMove : MonoBehaviour
         //anim.SetBool("Attack", false);
 		if(!dead)
 		{
+			switch(minionType)
+			{
+				case "Flier":
+				if(Drop && !GSD.safira)
+				{
+					Instantiate(Drop, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+				}
+				GSD.safira = true;
+				break;
+				
+				case "ShooterB":
+				if(Drop && !GSD.pomo)
+				{
+					Instantiate(Drop, transform.position, Quaternion.identity);
+				}
+				GSD.pomo = true;
+				break;
+				
+				case "ShooterH":
+				if(Drop && !GSD.guarnicao)
+				{
+					Instantiate(Drop, transform.position, Quaternion.identity);
+				}
+				GSD.guarnicao = true;
+				break;
+				
+				case "Jumper":
+				if(Drop && !GSD.cabo)
+				{
+					Instantiate(Drop, transform.position, Quaternion.identity);
+				}
+				GSD.cabo = true;
+				break;
+				
+				default:
+				if(Drop && !GSD.lamina)
+				{
+					Instantiate(Drop, transform.position, Quaternion.identity);
+				}
+				GSD.lamina = true;
+				break;
+			}
 			//anim.SetTrigger("Die");
-			Instantiate(Drop, transform.position, Quaternion.identity);
+			
+			if(Boss) Boss.SendMessage("MinionDied");
 			dead = true;
 		}
         Destroy(gameObject, deathTimer);
