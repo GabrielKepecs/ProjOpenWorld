@@ -2280,7 +2280,7 @@ GameObject:
   - component: {fileID: 1522517596}
   - component: {fileID: 1522517597}
   m_Layer: 0
-  m_Name: aaaaaaaa
+  m_Name: BigBoi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2903,6 +2903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2268af2f5113b6348b59e2aa2b2e09bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  podebugar: 0
 --- !u!4 &1809805137 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5d95de9fb267ce44f98447914a11bff8,
@@ -3466,6 +3467,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2624107623740506794, guid: 4ea9499679fe863469e391ee5aa5bff0,
+        type: 3}
+      propertyPath: podebugar
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2624107625256388617, guid: 4ea9499679fe863469e391ee5aa5bff0,
         type: 3}
       propertyPath: target
@@ -4106,6 +4112,12 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 680617031}
+    - target: {fileID: 5911095438436211229, guid: df012fd81ba1e064eb78261545de611d,
+        type: 3}
+      propertyPath: DeathEffect
+      value: 
+      objectReference: {fileID: 1451592278842746329, guid: 7271a0ec46f153148a89edbe31a770b7,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df012fd81ba1e064eb78261545de611d, type: 3}
 --- !u!1001 &7395963186326269727

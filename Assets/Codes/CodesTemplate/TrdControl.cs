@@ -27,9 +27,12 @@ public class TrdControl : MonoBehaviour
 	Vector3 initialSpawnLocation;//(315, 15, 400)
 	
 	[SerializeField]
-	GameObject Helmet, Shield, Potion, OriginalSword, NewSword;
+	GameObject Helmet, Shield, Potion, OriginalSword, NewSword, StopProjectile;
 	
 	public float moveMod = 1;
+	
+	public float spellCD, spellTimer;
+	public bool swordType;
 	
     float ikforce = 0;
     bool grab = false;
@@ -47,6 +50,7 @@ public class TrdControl : MonoBehaviour
         Damage,
         Jump,
         Spell,
+		Spell2,
     }
 
     public States state;
@@ -122,10 +126,18 @@ public class TrdControl : MonoBehaviour
         {
             ChangeState(States.Attack);
         }
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && spellCD >= spellTimer)
         {
-            ChangeState(States.Spell);
+			spellCD = 0;
+			
+			if(!swordType)
+				ChangeState(States.Spell);
+			else
+				ChangeState(States.Spell2);
         }
+		
+		if(spellCD < spellTimer)
+			spellCD += Time.deltaTime;
 		
 		mayJump = Physics.Raycast(transform.position + new Vector3(0, 0.2f, 0), Vector3.down, 0.5f);
 		//Debug.DrawLine(transform.position + new Vector3(0, 0.2f, 0), Vector2.down, Color.white, 0.5f);
@@ -269,6 +281,20 @@ public class TrdControl : MonoBehaviour
         ChangeState(States.Idle);
         //saida
     }
+	
+	IEnumerator Spell2()
+	{
+		anim.SetTrigger("Spell");
+		scream.Play();
+		
+		yield return new WaitForSeconds(0.5f);
+		StopProjectile.SetActive(true);
+		
+		yield return new WaitForSeconds(0.5f);
+		StopProjectile.SetActive(false);
+		
+		ChangeState(States.Idle);
+	}
 
     IEnumerator Damage()
     {
@@ -361,6 +387,9 @@ public class TrdControl : MonoBehaviour
 	{
 		OriginalSword.SetActive(!OriginalSword.activeSelf);
 		NewSword.SetActive(!NewSword.activeSelf);
+		
+		swordType = !swordType;
+		anim.SetBool("SpellType", swordType);
 	}
 	
 	public void GetPushed(float pushStr)

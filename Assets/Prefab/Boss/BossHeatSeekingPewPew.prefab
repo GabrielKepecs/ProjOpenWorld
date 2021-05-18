@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 189300978994248091}
   - component: {fileID: 189300978994248087}
   - component: {fileID: 2746590814576656773}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BossHeatSeekingPewPew
   m_TagString: BossProjectile
   m_Icon: {fileID: 0}

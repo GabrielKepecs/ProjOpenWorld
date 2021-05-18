@@ -10,6 +10,7 @@ public class MinionMove : MonoBehaviour
 	public Rigidbody rigid;
 	
 	public GameSessionData GSD;
+	public paradebugar PDB;
 	
 	public Vector3 patrolposition;
 	public float stoppedTime;
@@ -32,9 +33,9 @@ public class MinionMove : MonoBehaviour
 	}
 	public MinionState currentState;
 	
-	public GameObject Drop;
+	public GameObject Drop, DeathEffect;
 	public bool dead;
-	public float deathTimer;
+	public float deathTimer = 1;
 	
 	public string minionType;//jumper, shooter (base e homing), flying (voa na direcao do player), shadow (aleatorio)
 	public float baseSpeed, aggroSpeed;
@@ -202,11 +203,15 @@ public class MinionMove : MonoBehaviour
 			
 			case "ShooterB":
 			if(!Projectile) Projectile = BasicShot;
+			PDB.podebugar = true;
+			anim.SetTrigger("Shoot");
 			currentState = MinionState.Shoot;
 			break;
 			
 			case "ShooterH":
 			if(!Projectile) Projectile = HomingShot;
+			PDB.podebugar = true;
+			anim.SetTrigger("Shoot");
 			currentState = MinionState.Shoot;
 			break;
 			
@@ -272,6 +277,9 @@ public class MinionMove : MonoBehaviour
 			Attack.transform.position = Attack.transform.position + spawnPoint;
 			
 			atkCD = maxAtkCD;
+			PDB.podebugar = false;
+			anim.SetTrigger("ReturnToIdle");
+			
 			currentState = MinionState.Aggro;
 		}
 	}
@@ -316,9 +324,12 @@ public class MinionMove : MonoBehaviour
 	void Dying()
 	{
 		agent.isStopped = true;
-        //anim.SetBool("Attack", false);
+		
 		if(!dead)
 		{
+			PDB.podebugar = true;
+			anim.SetTrigger("Damaged");
+			
 			switch(minionType)
 			{
 				case "Flier":
@@ -361,12 +372,16 @@ public class MinionMove : MonoBehaviour
 				GSD.lamina = true;
 				break;
 			}
-			//anim.SetTrigger("Die");
 			
 			if(Boss) Boss.SendMessage("MinionDied");
 			dead = true;
 		}
-        Destroy(gameObject, deathTimer);
+		deathTimer -= Time.deltaTime;
+		if(deathTimer <= 0)
+		{
+			Instantiate(DeathEffect, transform.position, transform.rotation);
+			Destroy(gameObject);
+		}
 	}
 	
 	void Rotate()

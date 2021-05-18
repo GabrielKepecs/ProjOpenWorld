@@ -54,6 +54,7 @@ MonoBehaviour:
   anim: {fileID: 7395963186667164013}
   rigid: {fileID: 7395963185897411107}
   GSD: {fileID: 11400000, guid: 7235404cdd02aa4418d58cce99c7d38e, type: 2}
+  PDB: {fileID: 7395963186667164012}
   patrolposition: {x: 0, y: 0, z: 0}
   stoppedTime: 0
   patrolDistance: 10
@@ -64,8 +65,10 @@ MonoBehaviour:
   atkStopDistance: 17
   currentState: 0
   Drop: {fileID: 1538586051799171792, guid: 97baba3decfb41b4da96c99d50af0760, type: 3}
+  DeathEffect: {fileID: 1451592278842746329, guid: 7271a0ec46f153148a89edbe31a770b7,
+    type: 3}
   dead: 0
-  deathTimer: 0
+  deathTimer: 1
   minionType: ShooterH
   baseSpeed: 3
   aggroSpeed: 2
@@ -192,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2268af2f5113b6348b59e2aa2b2e09bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  podebugar: 0
 --- !u!1001 &7395963186842823934
 PrefabInstance:
   m_ObjectHideFlags: 0

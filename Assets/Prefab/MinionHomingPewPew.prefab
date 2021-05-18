@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4055355876496391095}
   - component: {fileID: 4055355876496391099}
   - component: {fileID: 2088215955585401769}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MinionHomingPewPew
   m_TagString: BossProjectile
   m_Icon: {fileID: 0}
