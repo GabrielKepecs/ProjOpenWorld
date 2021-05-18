@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class InventoryScript : MonoBehaviour
 {
 	[SerializeField]
-	GameObject Boot, Key1, Key2, Helm, Carrot, Potion, Map, Shield, MapImg;
+	GameObject Boot, Key1, Key2, Helm, Carrot, Potion, Map, Shield, MapImg, safira, pomo, lamina, guarni, cabo;
 	[SerializeField]
 	Text txt;
 	[SerializeField]
 	public GameSessionData GSD;
 	
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if(GSD.hasBoots)
 			EnableBoot();
@@ -31,6 +31,38 @@ public class InventoryScript : MonoBehaviour
 			EnableShield();
 		if(GSD.hasMap)
 			EnableMap();
+		
+		GSD.swordPieces = 0;
+		if(GSD.safira)
+		{
+			EnableSafira();
+			GSD.swordPieces++;
+		}
+		if(GSD.pomo)
+		{
+			EnablePomo();
+			GSD.swordPieces++;
+		}
+		if(GSD.lamina)
+		{
+			EnableLamina();
+			GSD.swordPieces++;
+		}
+		if(GSD.guarnicao)
+		{
+			EnableGuarni();
+			GSD.swordPieces++;
+		}
+		if(GSD.cabo)
+		{
+			EnableCabo();
+			GSD.swordPieces++;
+		}
+		if(GSD.swordPieces >= 5)
+			GSD.hasSword = true;
+		else
+			GSD.hasSword = false;
+		
     }
 	
 	void Update()
@@ -74,5 +106,25 @@ public class InventoryScript : MonoBehaviour
 	public void EnableMap()
 	{
 		MapImg.SetActive(true);
+	}
+	public void EnableSafira()
+	{
+		safira.SetActive(true);
+	}
+	public void EnablePomo()
+	{
+		pomo.SetActive(true);
+	}
+	public void EnableLamina()
+	{
+		lamina.SetActive(true);
+	}
+	public void EnableGuarni()
+	{
+		guarni.SetActive(true);
+	}
+	public void EnableCabo()
+	{
+		cabo.SetActive(true);
 	}
 }

@@ -60,5 +60,46 @@ public class PlayerCollision : MonoBehaviour
 			TrdC.EnableShield();
 			IS.EnableShield();
 		}
+		
+		if(other.gameObject.tag == "Safira")
+		{
+			TrdC.GSD.swordPieces++;
+			if(TrdC.GSD.swordPieces >= 5)
+				TrdC.GSD.hasSword = true;
+			IS.EnableSafira();
+			Destroy(other.gameObject);
+		}
+		if(other.gameObject.tag == "Pomo")
+		{
+			TrdC.GSD.swordPieces++;
+			if(TrdC.GSD.swordPieces >= 5)
+				TrdC.GSD.hasSword = true;
+			IS.EnablePomo();
+			Destroy(other.gameObject);
+		}
+		if(other.gameObject.tag == "Lamina")
+		{
+			TrdC.GSD.swordPieces++;
+			if(TrdC.GSD.swordPieces >= 5)
+				TrdC.GSD.hasSword = true;
+			IS.EnableLamina();
+			Destroy(other.gameObject);
+		}
+		if(other.gameObject.tag == "Guarni")
+		{
+			TrdC.GSD.swordPieces++;
+			if(TrdC.GSD.swordPieces >= 5)
+				TrdC.GSD.hasSword = true;
+			IS.EnableGuarni();
+			Destroy(other.gameObject);
+		}
+		if(other.gameObject.tag == "Cabo")
+		{
+			TrdC.GSD.swordPieces++;
+			if(TrdC.GSD.swordPieces >= 5)
+				TrdC.GSD.hasSword = true;
+			IS.EnableCabo();
+			Destroy(other.gameObject);
+		}
 	}
 }

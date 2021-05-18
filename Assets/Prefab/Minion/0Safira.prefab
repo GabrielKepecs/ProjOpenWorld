@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6828184665690934394}
   m_Layer: 0
   m_Name: 0Safira
-  m_TagString: Untagged
+  m_TagString: Safira
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,4 +110,3 @@ MonoBehaviour:
   GSD: {fileID: 11400000, guid: 7235404cdd02aa4418d58cce99c7d38e, type: 2}
   VectRotate: {x: 0, y: 0, z: 1}
   rotateSpd: 80
-  swordNumber: 0

@@ -16,6 +16,11 @@ TagManager:
   - Shield
   - BossProjectile
   - Boss
+  - Safira
+  - Pomo
+  - Lamina
+  - Guarni
+  - Cabo
   layers:
   - Default
   - TransparentFX

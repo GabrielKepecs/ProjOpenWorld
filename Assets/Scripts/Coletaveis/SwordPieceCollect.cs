@@ -38,13 +38,13 @@ public class SwordPieceCollect : aCollectable
 
     public override void OnTriggerEnter(Collider other)
 	{
-		if(other.gameObject.tag == "Player")
+		/*if(other.gameObject.tag == "Player")
 		{
-			GSD.swordPieces++;
-			if(GSD.swordPieces >= 5)
-				GSD.hasSword = true;
+			//GSD.swordPieces++;
+			//if(GSD.swordPieces >= 5)
+			//	GSD.hasSword = true;
 			
 			Destroy(gameObject);
-		}
+		}*/
 	}
 }

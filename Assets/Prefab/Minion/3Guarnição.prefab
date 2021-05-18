@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1845154290603875649}
   m_Layer: 0
   m_Name: "3Guarni\xE7\xE3o"
-  m_TagString: Untagged
+  m_TagString: Guarni
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,4 +111,3 @@ MonoBehaviour:
   GSD: {fileID: 11400000, guid: 7235404cdd02aa4418d58cce99c7d38e, type: 2}
   VectRotate: {x: 0, y: 0, z: 1}
   rotateSpd: 80
-  swordNumber: 3

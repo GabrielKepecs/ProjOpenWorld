@@ -343,7 +343,7 @@ public class MinionMove : MonoBehaviour
 				case "ShooterB":
 				if(Drop && !GSD.pomo)
 				{
-					Instantiate(Drop, transform.position, Quaternion.identity);
+					Instantiate(Drop, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
 				}
 				GSD.pomo = true;
 				break;
@@ -351,7 +351,7 @@ public class MinionMove : MonoBehaviour
 				case "ShooterH":
 				if(Drop && !GSD.guarnicao)
 				{
-					Instantiate(Drop, transform.position, Quaternion.identity);
+					Instantiate(Drop, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
 				}
 				GSD.guarnicao = true;
 				break;
@@ -359,18 +359,15 @@ public class MinionMove : MonoBehaviour
 				case "Jumper":
 				if(Drop && !GSD.cabo)
 				{
-					Instantiate(Drop, transform.position, Quaternion.identity);
+					Instantiate(Drop, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
 				}
 				GSD.cabo = true;
 				break;
-				
-				default:
-				if(Drop && !GSD.lamina)
-				{
-					Instantiate(Drop, transform.position, Quaternion.identity);
-				}
+			}
+			if(randomize && Drop && !GSD.lamina)
+			{
+				Instantiate(Drop, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
 				GSD.lamina = true;
-				break;
 			}
 			
 			if(Boss) Boss.SendMessage("MinionDied");
