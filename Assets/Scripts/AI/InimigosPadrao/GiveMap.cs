@@ -11,7 +11,7 @@ public class GiveMap : MonoBehaviour
 	InventoryScript IS;
 	
 	[SerializeField]
-	GameObject TextBox;
+	GameObject TextBox, TBox, TextObj;
 	[SerializeField]
 	Text txt;
 	
@@ -34,6 +34,8 @@ public class GiveMap : MonoBehaviour
 		if(playerNearby && !TextBox.activeSelf && !mapReceived)
 		{
 			TextBox.SetActive(true);
+			TBox.SetActive(true);
+			TextObj.SetActive(true);
 			txt.text = "Press E to receive a map.";
 			thisNPC = true;
 		}
@@ -41,6 +43,8 @@ public class GiveMap : MonoBehaviour
 		{
 			thisNPC = false;
 			TextBox.SetActive(false);
+			TBox.SetActive(false);
+			TextObj.SetActive(false);
 		}
 		
 		if(playerNearby && Input.GetKeyDown("e") && !GSD.hasMap)

@@ -13,7 +13,7 @@ public class PotionSeller : MonoBehaviour
 	TrdControl TrdC;
 	
 	[SerializeField]
-	GameObject TextBox;
+	GameObject TextBox, TBox, TextObj;
 	[SerializeField]
 	Text txt;
 	
@@ -36,12 +36,16 @@ public class PotionSeller : MonoBehaviour
 		if(playerNearby && !TextBox.activeSelf && !potionReceived)
 		{
 			TextBox.SetActive(true);
+			TBox.SetActive(true);
+			TextObj.SetActive(true);
 			txt.text = "Press E to trade one coin for a potion.";
 			thisNPC = true;
 		}
 		else if(!playerNearby && TextBox.activeSelf && thisNPC)
 		{
 			TextBox.SetActive(false);
+			TBox.SetActive(false);
+			TextObj.SetActive(false);
 			thisNPC = false;
 		}
 		

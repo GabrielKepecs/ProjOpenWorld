@@ -227,6 +227,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1512748694}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &156205583 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5493666214381287374, guid: e19f7456076b8b6429256b627dd48717,
+    type: 3}
+  m_PrefabInstance: {fileID: 5413080025360953668}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &177955183 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9072462705675222744, guid: e19f7456076b8b6429256b627dd48717,
+    type: 3}
+  m_PrefabInstance: {fileID: 5413080025360953668}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &191190424 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1904801559816707305, guid: 6db07243d1e2369468c134da855c55a3,
@@ -1451,7 +1463,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 5413080025360953668}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 156205583}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -2315,6 +2327,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GSD: {fileID: 11400000, guid: 7235404cdd02aa4418d58cce99c7d38e, type: 2}
   TextBox: {fileID: 1881995975}
+  TBox: {fileID: 177955183}
+  TextObj: {fileID: 156205583}
   txt: {fileID: 943122303}
   playerNearby: 0
   thisNPC: 0
@@ -3232,6 +3246,11 @@ PrefabInstance:
       objectReference: {fileID: 943122303}
     - target: {fileID: 1189401958503219808, guid: 8952697f36afc5c4e82c4b8dc27f422a,
         type: 3}
+      propertyPath: TBox
+      value: 
+      objectReference: {fileID: 177955183}
+    - target: {fileID: 1189401958503219808, guid: 8952697f36afc5c4e82c4b8dc27f422a,
+        type: 3}
       propertyPath: TrdC
       value: 
       objectReference: {fileID: 680617034}
@@ -3240,6 +3259,11 @@ PrefabInstance:
       propertyPath: TextBox
       value: 
       objectReference: {fileID: 1881995975}
+    - target: {fileID: 1189401958503219808, guid: 8952697f36afc5c4e82c4b8dc27f422a,
+        type: 3}
+      propertyPath: TextObj
+      value: 
+      objectReference: {fileID: 156205583}
     - target: {fileID: 1189401958503219809, guid: 8952697f36afc5c4e82c4b8dc27f422a,
         type: 3}
       propertyPath: m_RootOrder
@@ -3747,9 +3771,19 @@ PrefabInstance:
       objectReference: {fileID: 943122303}
     - target: {fileID: 4574723005706635155, guid: f4dd3fdd030087e4eb6d4622c4fdfcdf,
         type: 3}
+      propertyPath: TBox
+      value: 
+      objectReference: {fileID: 177955183}
+    - target: {fileID: 4574723005706635155, guid: f4dd3fdd030087e4eb6d4622c4fdfcdf,
+        type: 3}
       propertyPath: TextBox
       value: 
       objectReference: {fileID: 1881995975}
+    - target: {fileID: 4574723005706635155, guid: f4dd3fdd030087e4eb6d4622c4fdfcdf,
+        type: 3}
+      propertyPath: TextObj
+      value: 
+      objectReference: {fileID: 156205583}
     - target: {fileID: 4574723005706635160, guid: f4dd3fdd030087e4eb6d4622c4fdfcdf,
         type: 3}
       propertyPath: m_RootOrder

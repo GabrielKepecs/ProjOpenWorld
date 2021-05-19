@@ -9,7 +9,7 @@ public class BossSpawn : MonoBehaviour
 	GameSessionData GSD;
 	
 	[SerializeField]
-	GameObject TextBox;
+	GameObject TextBox, TBox, TextObj;
 	[SerializeField]
 	Text txt;
 	
@@ -32,6 +32,8 @@ public class BossSpawn : MonoBehaviour
 		if(playerNearby && !TextBox.activeSelf)
 		{
 			TextBox.SetActive(true);
+			TBox.SetActive(true);
+			TextObj.SetActive(true);
 			if(!GSD.hasSword)
 				txt.text = "Return here once you have the five sword pieces.";
 			else
@@ -42,6 +44,9 @@ public class BossSpawn : MonoBehaviour
 		{
 			thisNPC = false;
 			TextBox.SetActive(false);
+			TBox.SetActive(false);
+			TextObj.SetActive(false);
+			thisNPC = false;
 		}
 		
 		if(playerNearby && Input.GetKeyDown("e") && GSD.hasSword)
@@ -50,6 +55,8 @@ public class BossSpawn : MonoBehaviour
 			
 			thisNPC = false;
 			TextBox.SetActive(false);
+			TBox.SetActive(false);
+			TextObj.SetActive(false);
 			
 			Destroy(gameObject);
 		}
